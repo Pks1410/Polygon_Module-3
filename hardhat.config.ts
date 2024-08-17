@@ -22,6 +22,12 @@ const config: HardhatUserConfig = {
       }
     ]
   },
+  networks: {
+    volta: {
+      url: `https://volta-rpc.energyweb.org`,
+      accounts: ["YOUR_PRIVATE_KEY"]
+    }
+  },
   circom: {
     // (optional) Base path for input files, defaults to `./circuits/`
     inputBasePath: "./circuits",
