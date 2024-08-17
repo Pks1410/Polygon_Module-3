@@ -1,41 +1,21 @@
-# zardkat 🐱
+# Implementing logical gate circuit using Circom and Hardhat.
 
-A [hardhat-circom](https://github.com/projectsophon/hardhat-circom) template to generate zero-knowledge circuits, proofs, and solidity verifiers
+Replace your RPC URL and Private key in hardhat.config.ts
 
-## Quick Start
-Compile the Multiplier2() circuit and verify it against a smart contract verifier
-
+Install all dependancies by using:
+```shell
+npm install
 ```
-pragma circom 2.0.0;
 
-/*This circuit template checks that c is the multiplication of a and b.*/  
-
-template Multiplier2 () {  
-
-   // Declaration of signals.  
-   signal input a;  
-   signal input b;  
-   signal output c;  
-
-   // Constraints.  
-   c <== a * b;  
-}
-component main = Multiplier2();
+You first need to compile the circom circuit:
+```shell
+npx hardhat circom --verbose
 ```
-### Install
-`npm i`
 
-### Compile
-`npx hardhat circom` 
-This will generate the **out** file with circuit intermediaries and geneate the **MultiplierVerifier.sol** contract
-
-### Prove and Deploy
-`npx hardhat run scripts/deploy.ts`
-This script does 4 things  
-1. Deploys the MultiplierVerifier.sol contract
-2. Generates a proof from circuit intermediaries with `generateProof()`
-3. Generates calldata with `generateCallData()`
-4. Calls `verifyProof()` on the verifier contract with calldata
+Deploy the contract on Volta blockchain:
+```shell
+npx hardhat run scripts/deploy.ts --network volta
+```
 
 With two commands you can compile a ZKP, generate a proof, deploy a verifier, and verify the proof 🎉
 
@@ -103,3 +83,10 @@ npx hardhat newcircuit --name newcircuit
 **determinism**
 > When you recompile the same circuit using the groth16 protocol, even with no changes, this plugin will apply a new final beacon, changing all the zkey output files. This also causes your Verifier contracts to be updated.
 > For development builds of groth16 circuits, we provide the --deterministic flag in order to use a NON-RANDOM and UNSECURE hardcoded entropy (0x000000 by default) which will allow you to more easily inspect and catch changes in your circuits. You can adjust this default beacon by setting the beacon property on a circuit's config in your hardhat.config.js file.
+
+
+## Authors
+
+* Name: Prakhar Sahu
+* MetacrafterID: Prakhar1410 (1410sahu.prakhar@gmail.com)
+* Loom Video link for verification: https://www.loom.com/share/1ae975530fe64ba9810808e119681557?sid=5e2a2844-6dfd-4bb1-b942-23c3258fc810
